@@ -1,6 +1,7 @@
 import { cn, isImageUrl } from "@/lib/utils";
-import { Download, FileCheck2 } from "lucide-react";
+import { Download } from "lucide-react";
 import { Link } from "react-router-dom";
+import { PDF } from "./icons/Pdf";
 
 interface FileViewJobProps {
   id: string;
@@ -22,9 +23,9 @@ export function FileViewJob({ id, url, name }: FileViewJobProps) {
         <div className="flex items-center justify-center h-[92px]">
           {isImageUrl(url) ? (
             <Link to={url} download target="_blank" className="w-full h-[92px]">
-              <img src={url} alt="" className="w-full max-w-[139px] h-[92px] object-cover" />
+              <img src={url} alt="" className="w-full h-[92px] object-cover" />
             </Link>
-          ) : <FileCheck2 className="w-12 h-12 m-auto text-primary" />}
+          ) : <PDF size={65} />}
         </div>
 
         <div className="flex items-center justify-between mt-1 gap-2">

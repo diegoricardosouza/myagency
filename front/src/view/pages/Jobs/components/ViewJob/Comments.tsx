@@ -39,7 +39,7 @@ export function Comments({ id, company, content, files, userId, logo }: Comments
               {/* <p className="break-all">{content}</p> */}
 
               <div
-                className="text-sm break-all comments-content"
+                className="text-sm comments-content"
                 dangerouslySetInnerHTML={{ __html: content as string }}
               />
             </div>
@@ -47,7 +47,7 @@ export function Comments({ id, company, content, files, userId, logo }: Comments
             {files?.length ? (
               <div className="grid gap-3">
                 <Label>Arquivos:</Label>
-                <div className="grid lg:grid-cols-2 gap-2">
+                <div className="grid lg:grid-cols-3 gap-2">
                   {files?.map((file) => {
                     const nameConvert = file.name.replace("comments/", "jobs/")
                     return <FileViewJob key={file.id} id={file.id} url={file.url} name={nameConvert} />

@@ -98,12 +98,13 @@ export function ViewJob() {
 
           <StatusJob status={jobData?.status} />
 
-          <div className="grid gap-4 lg:grid-cols-3 lg:gap-5">
+          {/* <div className="grid gap-4 lg:grid-cols-3 lg:gap-5"> */}
+          <div className="grid gap-4 lg:grid-cols-[1fr_367px] lg:gap-5">
             <div>
               <h2 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0 mb-1">
                 Comentários
               </h2>
-              <ScrollArea className="h-full max-h-[543px] w-full rounded-md border bg-white p-6 flex flex-col gap-3 relative">
+              <ScrollArea className="h-full max-h-[601px] w-full rounded-md border bg-white p-6 flex flex-col gap-3 relative">
                 {isChangeStatus && (
                   <div className="w-full h-full flex justify-center items-center absolute top-0 left-0 z-[9999] bg-white transition-all">
                     <Spinner className="w-6 h-6 fill-primary" />
@@ -145,78 +146,85 @@ export function ViewJob() {
               )}
             </div>
 
+
+          </div>
+
+          <div>
             <div>
               <h2 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0 mb-1">
                 Dados da solicitação
               </h2>
-
-              <Card x-chunk="dashboard-07-chunk-0" className="pt-6">
-                <CardContent>
-                  <div className="grid gap-6">
-                    {user?.data.level !== 'CLIENTE' && (
-                      <div className="grid gap-1">
-                        <Label>Cliente:</Label>
-                        <p className="text-muted-foreground text-sm">{jobData?.user.company}</p>
-                      </div>
-                    )}
-
+            </div>
+            <div className="grid gap-4 lg:grid-cols-[1fr_367px] lg:gap-5">
+              <div>
+                <Card x-chunk="dashboard-07-chunk-0" className="pt-6">
+                  <CardContent>
                     <div className="grid gap-6">
-                      {jobData?.type === 'Atualizações' && (
-                        <>
-                          <div className="grid gap-1">
-                            <Label>Site:</Label>
-                            <p className="text-muted-foreground text-sm">{jobData?.site}</p>
-                          </div>
-
-                          <div className="grid gap-1">
-                            <Label>Página que deseja atualizar:</Label>
-                            <p className="text-muted-foreground text-sm">{jobData?.page}</p>
-                          </div>
-                        </>
+                      {user?.data.level !== 'CLIENTE' && (
+                        <div className="grid gap-1">
+                          <Label>Cliente:</Label>
+                          <p className="text-muted-foreground text-sm">{jobData?.user.company}</p>
+                        </div>
                       )}
 
-                      {jobData?.type !== 'Atualizações' && (
-                        <>
-                          <div className="grid gap-1">
-                            <Label>Formato:</Label>
-                            <p className="text-muted-foreground text-sm">{jobData?.format}</p>
-                          </div>
+                      <div className="grid gap-6">
+                        {jobData?.type === 'Atualizações' && (
+                          <>
+                            <div className="grid gap-1">
+                              <Label>Site:</Label>
+                              <p className="text-muted-foreground text-sm">{jobData?.site}</p>
+                            </div>
 
-                          <div className="grid gap-1">
-                            <Label>Outros Formatos:</Label>
-                            <p className="text-muted-foreground text-sm">{jobData?.other_formats}</p>
-                          </div>
+                            <div className="grid gap-1">
+                              <Label>Página que deseja atualizar:</Label>
+                              <p className="text-muted-foreground text-sm">{jobData?.page}</p>
+                            </div>
+                          </>
+                        )}
 
-                          <div className="grid gap-1">
-                            <Label>Frase:</Label>
-                            <p className="text-muted-foreground text-sm">{jobData?.phrase}</p>
-                          </div>
-                        </>
-                      )}
-                    </div>
+                        {jobData?.type !== 'Atualizações' && (
+                          <>
+                            <div className="grid gap-1">
+                              <Label>Formato:</Label>
+                              <p className="text-muted-foreground text-sm">{jobData?.format}</p>
+                            </div>
 
-                    <div className="grid gap-6">
-                      <div className="grid gap-1">
-                        <Label>Conteúdos:</Label>
-                        <div
-                          className="text-muted-foreground text-sm break-w comments-content"
-                          dangerouslySetInnerHTML={{ __html: jobData?.content as string }}
-                        ></div>
+                            <div className="grid gap-1">
+                              <Label>Outros Formatos:</Label>
+                              <p className="text-muted-foreground text-sm">{jobData?.other_formats}</p>
+                            </div>
+
+                            <div className="grid gap-1">
+                              <Label>Frase:</Label>
+                              <p className="text-muted-foreground text-sm">{jobData?.phrase}</p>
+                            </div>
+                          </>
+                        )}
                       </div>
-                      <div className="grid gap-1">
-                        <Label>Observações:</Label>
-                        <div
-                          className="text-muted-foreground text-sm break-w comments-content"
-                          dangerouslySetInnerHTML={{ __html: jobData?.obs as string }}
-                        ></div>
+
+                      <div className="grid gap-6">
+                        <div className="grid gap-1">
+                          <Label>Conteúdos:</Label>
+                          <div
+                            className="text-muted-foreground text-sm break-w comments-content"
+                            dangerouslySetInnerHTML={{ __html: jobData?.content as string }}
+                          ></div>
+                        </div>
+                        <div className="grid gap-1">
+                          <Label>Observações:</Label>
+                          <div
+                            className="text-muted-foreground text-sm break-w comments-content"
+                            dangerouslySetInnerHTML={{ __html: jobData?.obs as string }}
+                          ></div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
 
               {jobData?.files?.length ? (
-                <Card x-chunk="dashboard-07-chunk-0" className="pt-6 mt-6">
+                <Card x-chunk="dashboard-07-chunk-0" className="pt-6">
                   <CardContent>
                     <div>
                       <Label>Arquivos:</Label>

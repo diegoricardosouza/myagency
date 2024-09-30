@@ -1,12 +1,13 @@
 import { Comments } from "@/app/entities/Comments";
 import { User } from "@/app/entities/User";
 import illustration from "@/assets/placeholder.svg";
-import { getImageCommentAdmin } from "@/lib/utils";
+import { getImageCommentAdmin, identifyFileExtension } from "@/lib/utils";
 import { Card } from "@/view/components/ui/card";
 import { format } from "date-fns";
 import { Image } from "lightbox.js-react";
 import 'lightbox.js-react/dist/index.css';
 import { Link } from "react-router-dom";
+import { PDF } from "./icons/Pdf";
 
 interface ItemJobCard {
   id: string;
@@ -22,22 +23,29 @@ export function ItemJobCard({ id, name, dataCreated, formats, reference, user, c
   const image = getImageCommentAdmin(comments!, user.id, user.level);
   const data = format(dataCreated, "dd/MM/yyyy");
   const hour = format(dataCreated, "HH:mm");
+  const imageExtension = identifyFileExtension(image!);
 
   return (
     <Card className="relative p-3 mb-3 flex gap-3">
-      {image && (
+      {imageExtension === 'image' && (
         <Image
           className="aspect-square rounded-lg mb-1 w-[100px] h-[100px] md:w-[60px] md:h-[60px] object-cover"
           image={{ src: image, title: name  }}
           modalClose="clickOutside"
         />
       )}
-      {!image && (
+      {imageExtension === 'unknown' && (
         <Image
           className="aspect-square rounded-lg mb-1 w-[100px] h-[100px] md:w-[60px] md:h-[60px] object-cover"
           image={{src: illustration, title: name  }}
           modalClose="clickOutside"
         />
+      )}
+
+      {imageExtension === 'pdf' && (
+        <div className="w-[100px] h-[100px] lg:w-[60px] lg:h-[60px] rounded-[8px] bg-[#fff] flex items-center justify-center">
+          <PDF size={60} />
+        </div>
       )}
 
       <div className="flex-1">
