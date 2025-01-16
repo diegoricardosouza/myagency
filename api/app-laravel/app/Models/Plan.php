@@ -17,6 +17,7 @@ class Plan extends Model
         'digital_midia',
         'printed',
         'presentations',
+        'videos',
     ];
 
     public function users(): HasMany

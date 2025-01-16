@@ -27,6 +27,7 @@ class StoreUpdatePlanRequest extends FormRequest
             'digital_midia' => 'int',
             'printed' => 'int',
             'presentations' => 'int',
+            'videos' => 'int',
         ];
     }
 }

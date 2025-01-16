@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('digital_midia')->nullable();
             $table->integer('printed')->nullable();
             $table->integer('presentations')->nullable();
+            $table->integer('videos')->nullable();
             $table->timestamps();
         });
     }

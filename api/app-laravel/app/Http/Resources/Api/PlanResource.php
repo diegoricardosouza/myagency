@@ -20,7 +20,8 @@ class PlanResource extends JsonResource
             'updates' => $this->updates,
             'digital_midia' => $this->digital_midia,
             'printed' => $this->printed,
-            'presentations' => $this->presentations
+            'presentations' => $this->presentations,
+            'videos' => $this->videos
         ];
     }
 }

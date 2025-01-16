@@ -148,6 +148,10 @@ class JobService
         if($job->type == "Apresentações") {
             $this->countJobs($job, 'Apresentações', $user->plan->presentations, $user->id, $user->plan->name);
         }
+
+        if($job->type == "Vídeos") {
+            $this->countJobs($job, 'Vídeos', $user->plan->videos, $user->id, $user->plan->name);
+        }
     }
 
     private function countJobs($job, $type, $qtdPlan, $userId, $planName)
