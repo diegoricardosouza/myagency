@@ -71,6 +71,25 @@ export const FORMATS_PRESENTATION = [
   }
 ];
 
+export const FORMATS_VIDEOS = [
+  {
+    value: "Vertical 1080x1920",
+    label: "Vertical 1080x1920"
+  },
+  {
+    value: "Horizontal 1080x1920",
+    label: "Horizontal 1080x1920"
+  },
+  {
+    value: "Quadrado 1080x1080",
+    label: "Quadrado 1080x1080"
+  },
+  {
+    value: "Outros",
+    label: "Outros"
+  },
+];
+
 export const MAX_FILE_SIZE = 1024 * 1024 * 3;
 
 export const ACCEPTED_IMAGE_MIME_TYPES = [

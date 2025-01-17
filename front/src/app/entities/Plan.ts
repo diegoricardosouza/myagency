@@ -5,4 +5,5 @@ export interface Plan {
   digital_midia: string;
   printed: string;
   presentations: string;
+  videos: string;
 }

@@ -46,9 +46,10 @@ export function useNewFormatsController() {
   const midiaDigital = user?.data.plan?.digital_midia;
   const impresso = user?.data.plan?.printed;
   const apresentacoes = user?.data.plan?.presentations;
+  const videos = user?.data.plan?.videos;
 
-  const typeFormat = formats === 'atualizacoes' ? 'Atualizações' : (formats === 'midia-digital' ? 'Mídia Digital' : (formats === 'apresentacoes' ? 'Apresentações' : 'Impresso'));
-  const typeFormatJob = formats === 'atualizacoes' ? atualizacoes : (formats === 'midia-digital' ? midiaDigital : (formats === 'apresentacoes' ? apresentacoes : impresso));
+  const typeFormat = formats === 'atualizacoes' ? 'Atualizações' : (formats === 'midia-digital' ? 'Mídia Digital' : (formats === 'apresentacoes' ? 'Apresentações' : (formats === 'videos' ? 'Vídeos' : 'Impresso')));
+  const typeFormatJob = formats === 'atualizacoes' ? atualizacoes : (formats === 'midia-digital' ? midiaDigital : (formats === 'apresentacoes' ? apresentacoes : (formats === 'videos' ? videos : impresso)));
 
   const {
     register,

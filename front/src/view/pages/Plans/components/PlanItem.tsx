@@ -10,10 +10,11 @@ interface PlanItemProps {
   digital_midia: string;
   printed: string;
   presentations: string;
+  videos: string;
   deleteItem(id: string): void;
 }
 
-export function PlanItem({ id, name, updates, digital_midia, printed, presentations, deleteItem}: PlanItemProps) {
+export function PlanItem({ id, name, updates, digital_midia, printed, presentations, videos, deleteItem}: PlanItemProps) {
   return (
     <>
       <TableRow>
@@ -31,6 +32,9 @@ export function PlanItem({ id, name, updates, digital_midia, printed, presentati
         </TableCell>
         <TableCell className="font-medium">
           {String(presentations) === "-1" ? 'ilimitado' : presentations}
+        </TableCell>
+        <TableCell className="font-medium">
+          {String(videos) === "-1" ? 'ilimitado' : videos}
         </TableCell>
 
         <TableCell>

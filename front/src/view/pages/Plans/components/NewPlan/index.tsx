@@ -99,6 +99,18 @@ export function NewPlan() {
                       />
                     </div>
 
+                    <div className="grid gap-3">
+                      <Label htmlFor="videos">Vídeos</Label>
+                      <Input
+                        id="videos"
+                        type="number"
+                        className="w-full"
+                        {...register('videos')}
+                        error={errors?.videos?.message}
+                        min={-1}
+                      />
+                    </div>
+
                   </div>
                 </CardContent>
               </Card>

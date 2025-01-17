@@ -6,6 +6,7 @@ export interface PlanParams {
   digital_midia: number;
   printed: number;
   presentations: number;
+  videos: number;
 }
 
 export async function create(params: PlanParams) {

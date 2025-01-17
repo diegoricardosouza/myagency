@@ -19,6 +19,8 @@ const schema = z.object({
     .min(1, 'Impresso é obrigatório'),
   presentations: z.string()
     .min(1, 'Apresentações é obrigatório'),
+  videos: z.string()
+    .min(1, 'Vídeos é obrigatório'),
 });
 
 type FormData = z.infer<typeof schema>
@@ -60,6 +62,7 @@ export function useEditPlanController() {
       setValue("digital_midia", String(planEditData?.data?.digital_midia));
       setValue("printed", String(planEditData?.data?.printed));
       setValue("presentations", String(planEditData?.data?.presentations));
+      setValue("videos", String(planEditData?.data?.videos));
     }
   }, [planEditData, setValue]);
 

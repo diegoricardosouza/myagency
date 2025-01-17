@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/view/components/ui/card";
 import { Input } from "@/view/components/ui/input";
 import { Label } from "@/view/components/ui/label";
 
-import { FORMATS_DIGITAL_MIDIA, FORMATS_PRESENTATION, FORMATS_PRINTED, LevelProps } from "@/app/config/constants";
+import { FORMATS_DIGITAL_MIDIA, FORMATS_PRESENTATION, FORMATS_PRINTED, FORMATS_VIDEOS, LevelProps } from "@/app/config/constants";
 import { Dropzone } from "@/view/components/Dropzone";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/view/components/ui/select";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -97,7 +97,7 @@ export function NewFormats() {
                           <Controller
                             control={control}
                             name="format"
-                            defaultValue={formats === 'midia-digital' ? 'Feed' : (formats === 'apresentacoes' ? 'Impresso' : 'A3 (29,7x42cm)')}
+                            defaultValue={formats === 'midia-digital' ? 'Feed' : (formats === 'apresentacoes' ? 'Impresso' : (formats === 'videos' ? 'Vertical 1080x1920' : 'A3 (29,7x42cm)'))}
                             render={({ field: { onChange, value } }) => (
                               <Select
                                 onValueChange={onChange}
@@ -122,6 +122,11 @@ export function NewFormats() {
                                   )}
                                   {formats === 'apresentacoes' && (
                                     FORMATS_PRESENTATION.map((level: LevelProps) => (
+                                      <SelectItem key={level.value} value={level.value}>{level.label}</SelectItem>
+                                    ))
+                                  )}
+                                  {formats === 'videos' && (
+                                    FORMATS_VIDEOS.map((level: LevelProps) => (
                                       <SelectItem key={level.value} value={level.value}>{level.label}</SelectItem>
                                     ))
                                   )}
@@ -186,7 +191,9 @@ export function NewFormats() {
                         </div>
 
                         <div className="gap-3">
-                          <Label htmlFor="phrase">Frase Destaque</Label>
+                          <Label htmlFor="phrase">
+                            {formats === 'videos' ? 'Título' : 'Frase Destaque'}
+                          </Label>
                           <Input
                             id="phrase"
                             type="text"

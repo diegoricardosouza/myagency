@@ -7,6 +7,7 @@ export interface UpdatePlanParams {
   digital_midia: string;
   printed: string;
   presentations: string;
+  videos: string;
 }
 
 export async function update({ id, ...params }: UpdatePlanParams) {

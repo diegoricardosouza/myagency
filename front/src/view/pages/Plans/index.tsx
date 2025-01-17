@@ -47,6 +47,7 @@ export default function Plans() {
                     <TableHead>Mídia Digital</TableHead>
                     <TableHead>Impresso</TableHead>
                     <TableHead>Apresentações</TableHead>
+                    <TableHead>Vídeos</TableHead>
                     <TableHead className="w-[130px]">
                       Ações
                     </TableHead>

@@ -18,6 +18,8 @@ const schema = z.object({
     .min(1, 'Impresso é obrigatório'),
   presentations: z.string()
     .min(1, 'Apresentações é obrigatório'),
+  videos: z.string()
+    .min(1, 'Vídeos é obrigatório'),
 });
 
 type FormData = z.infer<typeof schema>
@@ -37,7 +39,8 @@ export function useNewPlanController() {
       updates: "0",
       digital_midia: "0",
       printed: "0",
-      presentations: "0"
+      presentations: "0",
+      videos: "0"
     }
   });
 
@@ -55,6 +58,7 @@ export function useNewPlanController() {
         digital_midia: Number(data.digital_midia),
         printed: Number(data.printed),
         presentations: Number(data.presentations),
+        videos: Number(data.videos),
       });
 
       queryClient.invalidateQueries({ queryKey: ['plans'] });

@@ -23,6 +23,7 @@ interface UserMe {
       digital_midia: string;
       printed: string;
       presentations: string;
+      videos: string;
     }
   }
 }
