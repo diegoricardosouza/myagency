@@ -93,3 +93,7 @@ export function identifyFileExtension(urlImage: string) {
 
   return 'unknown';
 }
+
+export function sanatizeLabelInfinite(value: string | number | undefined) {
+  return value === -1 ? 'ilimitado' : value
+}
