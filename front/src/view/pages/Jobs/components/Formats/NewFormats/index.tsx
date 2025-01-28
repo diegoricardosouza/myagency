@@ -4,6 +4,7 @@ import { Input } from "@/view/components/ui/input";
 import { Label } from "@/view/components/ui/label";
 
 import { FORMATS_DIGITAL_MIDIA, FORMATS_PRESENTATION, FORMATS_PRINTED, FORMATS_VIDEOS, LevelProps } from "@/app/config/constants";
+import { FormatType, useCountJobsController } from "@/lib/useCountJobsController";
 import { Dropzone } from "@/view/components/Dropzone";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/view/components/ui/select";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -24,11 +25,10 @@ export function NewFormats() {
     register,
     formats,
     isPending,
-    exceeded,
-    nJobsAvailable,
-    user,
-    isLoadingJobsCount
+    user
   } = useNewFormatsController();
+
+  const { exceeded, isLoadingJobsCount, nJobsAvailable } = useCountJobsController(formats as FormatType);
 
   return (
     <>
