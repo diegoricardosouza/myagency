@@ -13,38 +13,22 @@ interface ButtonFormatProps {
 export function ButtonFormat({ link, icon, children, credits, disabled }: ButtonFormatProps) {
   return (
     <>
-      {disabled && (
-        <span className={cn(
-          'h-[160px] px-5 rounded-xl flex flex-col justify-center items-center bg-gray-200 cursor-not-allowed text-white'
-        )}>
-          {icon}
-          <span className="text-[23px] font-semibold block leading-[26px] my-3 text-center">
-            {children}
-          </span>
-
-          <small className="text-[12px] font-light">
-            Créditos Dísponiveis: {credits}
-          </small>
+      <Link to={link}
+        className={cn(
+          'h-[160px] px-5 rounded-xl flex flex-col justify-center items-center bg-primary text-white transition-all',
+          'hover:bg-blue-700',
+          disabled && 'h-[160px] px-5 rounded-xl flex flex-col justify-center items-center bg-gray-200 text-white'
+        )}
+      >
+        {icon}
+        <span className="text-[19px] font-semibold block leading-[21px] my-3 text-center min-h-[42px]">
+          {children}
         </span>
-      )}
 
-      {!disabled && (
-        <Link to={link}
-          className={cn(
-            'h-[160px] px-5 rounded-xl flex flex-col justify-center items-center bg-primary text-white transition-all',
-            'hover:bg-blue-700'
-          )}
-        >
-          {icon}
-          <span className="text-[19px] font-semibold block leading-[21px] my-3 text-center min-h-[42px]">
-            {children}
-          </span>
-
-          <small className="text-[12px] font-light">
-            Créditos Dísponiveis: {credits}
-          </small>
-        </Link>
-      )}
+        <small className="text-[12px] font-light">
+          Créditos Dísponiveis: {credits}
+        </small>
+      </Link>
     </>
   )
 }
