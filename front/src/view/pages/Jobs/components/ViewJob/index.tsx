@@ -51,7 +51,7 @@ export function ViewJob() {
               </Button>
 
               <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
-                Ver Solicitação
+                Ver Solicitação - <span className="text-gray-400">Ref: {jobData?.referencia}</span>
               </h1>
             </div>
 
@@ -128,6 +128,7 @@ export function ViewJob() {
                     files={comment?.files}
                     userId={user!.data.id}
                     logo={comment.user.logo}
+                    date={comment.date ?? ''}
                   />
                 ))}
               </ScrollArea>

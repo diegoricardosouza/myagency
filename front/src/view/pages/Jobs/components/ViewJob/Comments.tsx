@@ -4,6 +4,7 @@ import { FileViewJob } from "@/view/components/FileViewJob";
 import { Avatar, AvatarImage } from "@/view/components/ui/avatar";
 import { Card, CardContent } from "@/view/components/ui/card";
 import { Label } from "@/view/components/ui/label";
+import { format } from "date-fns";
 
 interface CommentsProps {
   id: string;
@@ -12,20 +13,29 @@ interface CommentsProps {
   files?: Files[];
   userId: string;
   logo: string;
+  date: string;
 }
 
-export function Comments({ id, company, content, files, userId, logo }: CommentsProps) {
+export function Comments({ id, company, content, files, userId, logo, date }: CommentsProps) {
   return (
     <div className="mt-4">
       <h3 className={cn(
-        "font-semibold flex items-center gap-2 mb-2 text-sm lg:text-base justify-end",
-        id !== userId && "justify-start"
+        "font-semibold flex items-center gap-2 mb-2 text-sm lg:text-base justify-between ",
+        // id !== userId && "justify-start"
       )}>
         {/* <CircleUser className="w-5 h-5" /> */}
-        <Avatar className="h-9 w-9 sm:flex border">
-          <AvatarImage src={logo} alt={company} className="object-contain" />
-        </Avatar>
-        {company}
+        <div className="flex items-center gap-2">
+          <Avatar className="h-9 w-9 sm:flex border">
+            <AvatarImage src={logo} alt={company} className="object-contain" />
+          </Avatar>
+          {company}
+        </div>
+
+        <div>
+          <span className="text-xs font-normal text-gray-500">
+            {format(date, "dd/MM/yyyy")} às {format(date, "HH:mm")}hrs
+          </span>
+        </div>
       </h3>
       <Card x-chunk="dashboard-07-chunk-3" className={cn(
           "pt-6 bg-primary text-white",

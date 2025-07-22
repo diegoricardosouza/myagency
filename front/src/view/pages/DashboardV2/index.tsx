@@ -77,6 +77,7 @@ export function DashboardV2() {
                     reference={job.referencia}
                     user={user!.data}
                     comments={job.comments}
+                    phrase={job.phrase}
                   />
                 )
               })}
@@ -103,6 +104,7 @@ export function DashboardV2() {
                     reference={job.referencia}
                     user={user!.data}
                     comments={job.comments}
+                    phrase={job.phrase}
                   />
                 )
               })}
@@ -129,6 +131,7 @@ export function DashboardV2() {
                     reference={job.referencia}
                     user={user!.data}
                     comments={job.comments}
+                    phrase={job.phrase}
                   />
                 )
               })}
@@ -155,6 +158,7 @@ export function DashboardV2() {
                     reference={job.referencia}
                     user={user!.data}
                     comments={job.comments}
+                    phrase={job.phrase}
                   />
                 )
               })}
