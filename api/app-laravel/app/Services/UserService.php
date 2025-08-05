@@ -47,9 +47,9 @@ class UserService
         $user = $this->user->findOrFail($id);
 
         if(!empty($data['logo'])) {
-            if (!empty($data['logo']) && Storage::exists($user->logo)) {
+            // Verifica se já tem uma logo salva e se ela existe no storage
+            if (!empty($user->logo) && Storage::exists($user->logo)) {
                 Storage::delete($user->logo);
-                // $data['logo'] = $data['logo']->storeAs('users', $data['logo']->hashName());
             }
 
             $data['logo'] = $data['logo']->storeAs('users', $data['logo']->hashName());
