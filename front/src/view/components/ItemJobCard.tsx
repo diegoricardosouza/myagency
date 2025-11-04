@@ -49,7 +49,7 @@ export function ItemJobCard({ id, name, dataCreated, formats, reference, user, c
 
         <div className="p-3">
           <span className="block text-gray-400 uppercase text-[12px] font-medium mb-2">Formato: {formats}</span>
-          <p className="text-gray-300 font-bold leading-[1] mb-1">{name}</p>
+          <p className="text-gray-300 font-bold leading-[1] mb-1 truncate max-w-[220px]">{name}</p>
           <p className="text-primary font-bold leading-[1.3]">{phrase}</p>
 
           <span className="block text-gray-400 text-[12px] font-medium mt-2">

@@ -142,6 +142,7 @@ export function ViewJob() {
                   </h2>
                   <CreateComment
                     whatsapp={whatsapp!}
+                    job={jobData}
                   />
                 </>
               )}
