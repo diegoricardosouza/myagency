@@ -64,7 +64,11 @@ class CommentService
 
         if(Auth::user()->level != 'CLIENTE') {
             $user = $this->user->where('id', $commentAfterCreation->job->user_id)->first();
-            $this->sendMailAdmin($user->email, $commentAfterCreation, $commentAfterCreation->job->id);
+            try {
+                $this->sendMailAdmin($user->email, $commentAfterCreation, $commentAfterCreation->job->id);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
         }
 
         return $commentCreated;

@@ -6,6 +6,7 @@ import { Spinner } from "@/view/components/Spinner";
 import { Label } from "@/view/components/ui/label";
 import { ScrollArea } from "@/view/components/ui/scroll-area";
 import { ChevronLeft, Loader2 } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 import { Link } from "react-router-dom";
 import { BreadcrumbViewJob } from "./BreadcrumbViewJob";
 import { Comments } from "./Comments";
@@ -31,6 +32,12 @@ export function ViewJob() {
   const userRoleNotClient = user?.data.level !== "CLIENTE";
   // const userRoleClient = user?.data.level === "CLIENTE";
   const userNotBelongsJob = user?.data.id === jobData?.user.id;
+
+  const numberFormated = whatsapp?.replace(/\D/g, '');
+  let msg = `⚠️ Olá ${jobData?.user.name} tudo bem?\n`;
+  msg += 'Sua espera acabou!\n';
+  msg += 'Acesse o link abaixo para conferir!\n';
+  msg += `https://minhaagencia.inovasite.com/solicitacoes/detalhes/${jobData?.id}`;
 
   return (
     <>
@@ -93,7 +100,21 @@ export function ViewJob() {
             </div>
           </div>
 
-          <StatusJob status={jobData?.status} />
+          <div className="flex justify-between items-center">
+            <StatusJob status={jobData?.status} />
+
+            {user?.data.level === 'ADMIN' && (
+              <Button
+                asChild
+                className="bg-[#25d366] hover:bg-[#128c7e] text-white font-medium py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all mb-4"
+              >
+                <Link to={`https://api.whatsapp.com/send/?phone=55${numberFormated}&text=${encodeURIComponent(msg)}`} target="_blank">
+                  <SiWhatsapp className="mr-2 h-4 w-4" />
+                  Compartilhar
+                </Link>
+              </Button>
+            )}
+          </div>
 
           {/* <div className="grid gap-4 lg:grid-cols-3 lg:gap-5"> */}
           <div className="grid gap-4 lg:grid-cols-[1fr_367px] lg:gap-5">
