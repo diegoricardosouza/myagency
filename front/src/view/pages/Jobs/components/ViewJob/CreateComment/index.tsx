@@ -29,6 +29,10 @@ export function CreateComment({ whatsapp, job }: CreateCommentProps) {
   } = useCreateCommentController()
 
   const numberFormated = whatsapp?.replace(/\D/g, '');
+  let msg = `⚠️ Olá ${job?.user.name} tudo bem?\n`;
+  msg += 'Sua espera acabou!\n';
+  msg += 'Acesse o link abaixo para conferir!\n';
+  msg += `https://minhaagencia.inovasite.com/solicitacoes/detalhes/${id}`;
 
   return (
     <>
@@ -99,7 +103,7 @@ export function CreateComment({ whatsapp, job }: CreateCommentProps) {
         </p>
 
         <Button asChild className="max-w-[250px] m-auto">
-          <Link to={`https://api.whatsapp.com/send/?phone=${numberFormated}&text=Olá%20${job?.user.name}%20tudo%20bem?%0DSua%20espera%20acabou!%0DAcesse%20o%20link%20abaixo%20para%20conferir!%0Dhttps://minhaagencia.inovasite.com/solicitacoes/detalhes/${id}`} target="_blank">
+          <Link to={`https://api.whatsapp.com/send/?phone=${numberFormated}&text=${encodeURIComponent(msg)}`} target="_blank">
             Compartilhar
           </Link>
         </Button>
