@@ -81,7 +81,7 @@ export function CreateComment({ whatsapp, job }: CreateCommentProps) {
                   name="files"
                   defaultValue={null}
                   render={({ field: { onChange } }) => (
-                    <Dropzone onChange={onChange} className="min-h-[200px]" clearFiles={isLoadingCreateComment} columnsFiles={2} />
+                    <Dropzone onChange={onChange} className="min-h-[100px]" clearFiles={isLoadingCreateComment} columnsFiles={2} />
                   )}
                 />
               </div>

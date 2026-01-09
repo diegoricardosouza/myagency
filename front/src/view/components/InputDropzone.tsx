@@ -35,12 +35,12 @@ export const InputDropzone = ({ dropzone, className }: InputDropzoneProps) => {
         <input {...getInputProps()} className="hidden" />
         <label htmlFor="dropzone-file" className="cursor-pointer w-full h-full">
           <div className="flex flex-col items-center justify-center pt-5 pb-6 w-full h-full">
-            <Upload className={`h-10 w-10 mx-auto mb-3 ${isDragActive ? 'text-blue-500' : 'text-gray-400'}`} />
+            <Upload className={`h-7 w-7 mx-auto mb-3 ${isDragActive ? 'text-blue-500' : 'text-gray-400'}`} />
             {isDragActive ? (
               <p className="font-bold text-md text-blue-500">Solte para adicionar</p>
             ) : (
               <>
-                <p className="mb-2 text-md text-gray-400 text-center">
+                <p className="mb-2 text-sm text-gray-400 text-center">
                   <span className="font-bold">Clique para enviar</span> ou arraste até aqui
                 </p>
               </>
