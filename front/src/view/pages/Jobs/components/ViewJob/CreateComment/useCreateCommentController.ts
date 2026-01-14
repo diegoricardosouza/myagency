@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Jobs } from "@/app/entities/Jobs";
 import { useAuth } from "@/app/hooks/useAuth";
 import { commentsService } from "@/app/services/commentsService";
 import { CommentsParams } from "@/app/services/commentsService/create";
@@ -5,6 +7,7 @@ import { jobsService } from "@/app/services/jobs";
 import { UpdateJobParams } from "@/app/services/jobs/update";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -18,11 +21,12 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-export function useCreateCommentController() {
+export function useCreateCommentController(whatsapp: string | undefined, job?: Jobs) {
   const { id } = useParams();
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [openModalComment, setOpenModalComment] = useState(false);
+  const [sendWhats, setSendWhats] = useState(false);
 
   const {
     register,
@@ -51,12 +55,48 @@ export function useCreateCommentController() {
     }
   });
 
-  function openCommentModal() {
-    setOpenModalComment(true);
-  }
-
   function closeCommentModal() {
     setOpenModalComment(false);
+  }
+
+  async function sendWhatsAppNotification() {
+    try {
+      setSendWhats(true);
+
+      const numberFormated = whatsapp?.replace(/\D/g, '');
+
+      // let msg = `⚠️ Olá ${jobData?.data.user.name} tudo bem?\n`;
+      // msg += 'Sua espera acabou!\n';
+      // msg += 'Acesse o link abaixo para conferir!\n';
+      // msg += `https://minhaagencia.inovasite.com/solicitacoes/detalhes/${jobData?.data.id}`;
+      let msg = `⚠️ Olá ${job?.user.name} tudo bem?\n`;
+      msg += 'Sua espera acabou!\n';
+      msg += 'Acesse o link abaixo para conferir!\n';
+      msg += `https://minhaagencia.inovasite.com/solicitacoes/detalhes/${id}`;
+
+      const res = await axios.post(
+        'https://dropestore.com/wp-json/wdm/v1/send/text',
+        {
+          number: `${numberFormated}`,
+          text: msg
+        },
+        {
+          headers: {
+            Accept: 'application/json',
+            token: import.meta.env.VITE_TOKEN_WHATSAPP,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      console.log(res.data);
+      // toast.success('WhatsApp enviado com sucesso!');
+    } catch (error) {
+      console.error(error);
+      toast.error('Erro ao enviar WhatsApp');
+    } finally {
+      setSendWhats(false);
+    }
   }
 
   const handleSubmit = hookFormSubmit(async (data) => {
@@ -89,7 +129,9 @@ export function useCreateCommentController() {
       if (user?.data.level === 'CLIENTE') {
         toast.success('Comentário cadastrado com sucesso!');
       } else {
-        openCommentModal();
+        // openCommentModal();
+        sendWhatsAppNotification();
+        toast.success('Comentário cadastrado com sucesso! O cliente será notificado via WhatsApp.');
       }
 
       reset();
@@ -107,6 +149,8 @@ export function useCreateCommentController() {
     errors,
     id,
     openModalComment,
-    closeCommentModal
+    sendWhats,
+    closeCommentModal,
+    sendWhatsAppNotification
   }
 }

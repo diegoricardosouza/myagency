@@ -2,6 +2,7 @@ import { useAuth } from "@/app/hooks/useAuth";
 import { jobsService } from "@/app/services/jobs";
 import { UpdateJobParams } from "@/app/services/jobs/update";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -16,6 +17,7 @@ export function useViewJobController() {
   const { id } = useParams();
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const [sendWhats, setSendWhats] = useState(false);
 
   const {
     handleSubmit: hookFormSubmit
@@ -92,14 +94,53 @@ export function useViewJobController() {
     }
   });
 
+  async function sendWhatsAppNotification() {
+    try {
+      setSendWhats(true);
+
+      const whatsapp = jobData?.data.user.whatsapp;
+      const numberFormated = whatsapp?.replace(/\D/g, '');
+
+      let msg = `⚠️ Olá ${jobData?.data.user.name} tudo bem?\n`;
+      msg += 'Sua espera acabou!\n';
+      msg += 'Acesse o link abaixo para conferir!\n';
+      msg += `https://minhaagencia.inovasite.com/solicitacoes/detalhes/${jobData?.data.id}`;
+
+      const res = await axios.post(
+        'https://dropestore.com/wp-json/wdm/v1/send/text',
+        {
+          number: `${numberFormated}`,
+          text: msg
+        },
+        {
+          headers: {
+            Accept: 'application/json',
+            token: import.meta.env.VITE_TOKEN_WHATSAPP,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      console.log(res.data);
+      toast.success('WhatsApp enviado com sucesso!');
+    } catch (error) {
+      console.error(error);
+      toast.error('Erro ao enviar WhatsApp');
+    } finally {
+      setSendWhats(false);
+    }
+  }
+
   return {
     jobData: jobData?.data,
     isLoading,
     isChangeStatus,
     user,
+    sendWhats,
     handleChangingStatus,
     handleApprovingStatus,
     handleApprovedStatus,
+    sendWhatsAppNotification,
     changingStatus,
     approvingStatus,
     approvedStatus,

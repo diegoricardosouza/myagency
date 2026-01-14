@@ -14,7 +14,6 @@ import { CreateComment } from "./CreateComment";
 import { StatusJob } from "./StatusJob";
 import { useViewJobController } from "./useViewJobController";
 
-
 export function ViewJob() {
   const {
     jobData,
@@ -24,7 +23,9 @@ export function ViewJob() {
     approvedStatus,
     handleChangingStatus,
     handleApprovedStatus,
-    whatsapp
+    sendWhatsAppNotification,
+    whatsapp,
+    sendWhats
   } = useViewJobController();
 
   const buttonsRuleNotApproved = jobData?.status !== "approved";
@@ -33,11 +34,11 @@ export function ViewJob() {
   // const userRoleClient = user?.data.level === "CLIENTE";
   const userNotBelongsJob = user?.data.id === jobData?.user.id;
 
-  const numberFormated = whatsapp?.replace(/\D/g, '');
-  let msg = `⚠️ Olá ${jobData?.user.name} tudo bem?\n`;
-  msg += 'Sua espera acabou!\n';
-  msg += 'Acesse o link abaixo para conferir!\n';
-  msg += `https://minhaagencia.inovasite.com/solicitacoes/detalhes/${jobData?.id}`;
+  // const numberFormated = whatsapp?.replace(/\D/g, '');
+  // let msg = `⚠️ Olá ${jobData?.user.name} tudo bem?\n`;
+  // msg += 'Sua espera acabou!\n';
+  // msg += 'Acesse o link abaixo para conferir!\n';
+  // msg += `https://minhaagencia.inovasite.com/solicitacoes/detalhes/${jobData?.id}`;
 
   return (
     <>
@@ -105,13 +106,20 @@ export function ViewJob() {
 
             {user?.data.level === 'ADMIN' && (
               <Button
-                asChild
                 className="bg-[#25d366] hover:bg-[#128c7e] text-white font-medium py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all mb-4"
+                onClick={sendWhatsAppNotification}
               >
-                <Link to={`https://api.whatsapp.com/send/?phone=55${numberFormated}&text=${encodeURIComponent(msg)}`} target="_blank">
-                  <SiWhatsapp className="mr-2 h-4 w-4" />
-                  Compartilhar
-                </Link>
+                {sendWhats ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <SiWhatsapp className="mr-2 h-4 w-4" />
+                    Compartilhar
+                  </>
+                )}
               </Button>
             )}
           </div>

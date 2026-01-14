@@ -1,6 +1,5 @@
 import { Jobs } from "@/app/entities/Jobs";
 import { Dropzone } from "@/view/components/Dropzone";
-import { Modal } from "@/view/components/Modal";
 import { Button } from "@/view/components/ui/button";
 import { Card, CardContent } from "@/view/components/ui/card";
 import { Label } from "@/view/components/ui/label";
@@ -9,7 +8,6 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/pt-br';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Loader2 } from "lucide-react";
 import { Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { useCreateCommentController } from "./useCreateCommentController";
 
 interface CreateCommentProps {
@@ -22,17 +20,14 @@ export function CreateComment({ whatsapp, job }: CreateCommentProps) {
     handleSubmit,
     control,
     errors,
-    isLoadingCreateComment,
-    id,
-    openModalComment,
-    closeCommentModal
-  } = useCreateCommentController()
+    isLoadingCreateComment
+  } = useCreateCommentController(whatsapp, job)
 
-  const numberFormated = whatsapp?.replace(/\D/g, '');
-  let msg = `⚠️ Olá ${job?.user.name} tudo bem?\n`;
-  msg += 'Sua espera acabou!\n';
-  msg += 'Acesse o link abaixo para conferir!\n';
-  msg += `https://minhaagencia.inovasite.com/solicitacoes/detalhes/${id}`;
+  // const numberFormated = whatsapp?.replace(/\D/g, '');
+  // let msg = `⚠️ Olá ${job?.user.name} tudo bem?\n`;
+  // msg += 'Sua espera acabou!\n';
+  // msg += 'Acesse o link abaixo para conferir!\n';
+  // msg += `https://minhaagencia.inovasite.com/solicitacoes/detalhes/${id}`;
 
   return (
     <>
@@ -97,7 +92,7 @@ export function CreateComment({ whatsapp, job }: CreateCommentProps) {
         </div>
       </form>
 
-      <Modal open={openModalComment} onClose={closeCommentModal}>
+      {/* <Modal open={openModalComment} onClose={closeCommentModal}>
         <p className="text-center">
           Clique no botão para compartilhar a arte no whatsapp do cliente
         </p>
@@ -107,7 +102,7 @@ export function CreateComment({ whatsapp, job }: CreateCommentProps) {
             Compartilhar
           </Link>
         </Button>
-      </Modal>
+      </Modal> */}
     </>
   )
 }
